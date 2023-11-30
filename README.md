@@ -1,109 +1,137 @@
+## Syriatel Customer Charn Prediction Project
+## Overview
+Syriatel is a telecommunication company founded in 2000 based in Syria with its headquarters in Damascus. It offers GSM,3G, and 4G network services.
+Syriatel is faced with a challenge where there is a high churn rate with most of its customers abandoning their services and switching to their competitors.
+ The company has identified this problem and is now seeking to build a classifier that will help them predict whether a customer will soon stop doing business with them. 
+This will be done by proper analysis using their dataset to gain insights on what factors result in a high churning rate. A prediction model will be developed and this will provide insights and recommendations to the telecommunication company that will help them retain customers and avoid churning.
+# Problem statement
+To develop a machine learning model that can be used to predict and determine the probability of a customer churning a service and what factors result in this.
+# Objectives
+•	To identify the features that are likely to cause a customer to churn.
+•	To develop a machine learning model that will accurately predict the customers that are at a high risk of churning.
+•	To come up with measures to prevent customers who are at high risk from churning 
+## Business Understanding.
+Customer attrition, also known as churn, refers to the loss of clients or customers and is particularly pertinent to industries such as telephone service companies, internet service providers, TV companies, and insurance firms. Managing and mitigating customer attrition is a crucial concern for businesses in these sectors.
+The primary objective of this project is to enhance customer retention by investigating the key factors associated with customers unsubscribing from a service, specifically within the telecommunication sector. The focus is on identifying patterns that may predict customer churn and devising strategies to address this phenomenon.
+For the telecommunication company, the overarching goal is to minimize financial losses attributed to customers who discontinue their services. The project seeks to uncover discernible patterns in customer behavior leading churning.
+## Data Understanding.
+The data used has been sourced from Kaggle. The dataset contains a record of 3333 rows and 21 columns containing different features. Out of the 21 columns, 4 are categorical and 17 are numerical. The categorical features include:
+1.	State -This is where the customer resides
+2.	Phone number -The contact of the customer
+The numerical features include:
+1.	Area code - The area code associated with the customer's phone number.
+2.	Account length - The number of days the customer has been an account holder.
+3.	Number of v-mail messages - The number of voice mail messages received by the customer.
+4.	Total day minutes - The total number of minutes the customer used during the day.
+5.	Total day calls - The total number of calls made by the customer during the day.
+6.	Total day charge - The total charges incurred by the customer for daytime usage.
+7.	Total evening minutes - The total number of minutes the customer used during the evening.
+8.	Total evening calls - The total number of calls the customer used during the evening.
+9.	Total evening charge - The total charges incurred by the customer during the evening.
+10.	Total night minutes - The total number of minutes the customer used during the night.
+11.	Total night calls - The total number of minutes the customer used during the night.
+12.	Total night charge - The total charges incurred by the customer for nighttime usage.
+13.	Total international minutes - The total number of international minutes used by the customer.
+14.	Total international calls - The total number of international calls used by the customer.
+15.	Total international charge - The total charges incurred by the customer for international usage.
+16.	Customer service calls - The number of customer service calls made by the customer.
+17.	Churn – This is the target variable its binary (1 which means loss of client and 0 meaning loss of client.
+## Data Preparation
+# Data Cleaning
+We went through the dataset and inspected if there were missing values and null values. From this process there were no missing values and null values This shows the dataset we are working with to be complete. There were no duplicates in the dataset. The column representing the phone number was dropped because it was not important for our modeling 
+# Data Analysis
+In the Exploratory Data Analysis process, we looked into the dataset by visually and statistically examining and understanding the data before further splitting it for more analysis and modelling.
+# Univariate Analysis 
+We started our analysis by looking into each of the features in our dataset starting with the target variable and visualizing it to see the distribution.
+![Alt text](image-1.png)
+ 
+From the graph above about 483 customers out of the total 3333 in the dataset have churned (meaning terminated) their contracts with the telecommunication company.
+A histogram showing the distribution of all the numerical features enabled us to see most of the features having a normal distribution curve.  
+![Alt text](image-2.png)
+From the visualization above the observations on the distribution of the numerical features can be seen
+ 1. The distribution in the Account length is positively skewed, indicating that the majority of customers have shorter account lengths. This suggests potential inaccuracies in predicting customer churn, as longer account lengths might be a more accurate predictor.
 
-# Phase 3 Project - Choosing a Dataset
+ 2. The distribution of the Number of Voice Mail Messages is relatively even, indicating that the number of voicemail messages is not a particularly strong predictor of customer churn.
+ 3. Total Day Minutes, Total Day Calls, and Total Day Charge: These features show a significant amount of potential noise in the data, as the distribution is positively skewed and there is a significant amount of overlap between the classes.
 
-You have the option to either choose a dataset from a curated list or propose your own dataset not on the list. The goal is to choose a dataset appropriate to the type of business problem and/or classification methods that most interests you. **It is up to you to define a stakeholder and business problem appropriate to the dataset you choose.**
+4. Total Evening Minutes, Calls, and Charge: These features show a similar pattern to the Total Day features, indicating potential noise and overlap between classes.
 
-If you choose a dataset from the curated list, inform your instructor which dataset you chose and jump right into the project. If you would like to propose your own dataset, run the dataset and business problem by your instructor for approval before starting your project.
+5. Total Nighttime Minutes, Calls, and Charge: The distribution of these features is negatively skewed, indicating that the majority of customers have less activity at night. This suggests potential inaccuracies in predicting customer churn, as higher activity at night might be a more accurate predictor.
+6. Total International Minutes, Calls, and Charge: These features show a similar pattern to the Total Day features, indicating potential noise and overlap between classes.
 
-## Your Get Hired 'Game Plan'
+7. The distribution of Customer Service Calls is negatively skewed, indicating that the majority of customers have fewer customer service calls. This suggests potential inaccuracies in predicting customer churn, as higher customer service calls might be a more accurate predictor.
+The visualization below is for the categorical features.
+ ![Alt text](image-3.png)
+ 
+From the plot above we can see states like West Virginia, Minnesota, New York, Alabama, and Wisconsin while California had the lowest number of customers
+# Bivariate Analysis
+We analyzed two features to explore their relationship and see how the changes in each feature affect the other. In the boxplot below we can conclude that most of the customers who have terminated their contract are from the area code 415 and 510.
+![Alt text](image.png)
+ 
+# Dealing with Outliers
+We removed the outliers from our data and remained with 3169.
+Features Correlation
+From the matrix, we can conclude that most of the features are not correlated. The features that are correlated have a strong positive relationship with the other features. This means when one feature increases, the other features also tend to increase.
+Some of the features that are correlated are:
+1. Total day charge and total day minutes features have a strong positive correlation.
+2. Total evening charge and total evening minutes features have a strong positive correlation.
+3. Total night charge and total night minutes features are fully positively correlated.
+4. Total int charge and total int minutes features are fully positively correlated.
+These features can be seen to fall on the dark blue grid which shows how strongly they are correlated
 
-Help set yourself up for success by being strategic about your project/dataset choices.
+Some of the features that are close to 0 mean that there is no linear relationship between the features.
+ Correlation values close to -1 mean that there is a strong negative relationship between the features. This means when one feature increases, the other feature tends to decrease.
+For the perfectly correlated features, this is because the charges are a direct result of the minutes used. 
 
-**Already know what your job search focus will be?** Consider choosing a dataset that relates to the companies/industries you are interested in and the types of business problems/data they navigate day to day. Doing so demonstrates your subject matter knowledge in their area, significantly elevating your relevance and value as a candidate -- we've seen this strategy WOW companies time and time again!
+# Multicollinearity check
+From the analysis, we found some features in the dataset that were highly correlated with each other. This will result in problems when we are doing our modeling. The rows and columns that were highly correlated by about 0.9 were dropped.
+Feature Engineering
+We transformed some of the features in our dataset to be more suitable for our modeling in machine learning algorithms. Some of the techniques employed were:
+1.	Label Encoding which enabled the conversion of the categorical features (churn) which is our target. By assigning a unique integer yes with 1 and no with 0. This will enable modelling in Machine learning for the algorithm to work.
+2.	One-Hot Encoding. The other categorical features like the state, area code, international plan, and voice mail plan were converted to a binary feature by assigning a value of 1 if the category is present and 0 if it's absent. This will prevent the model from assuming any ordinal relationship between the categories.
+3.	Data scaling. The numerical features are scaled to ensure they are on a similar scale to prevent the domination of certain features in the model.
+## Modeling
+The dataset we are working on is an example of a binary classification problem that predicts churn (whether a customer will churn or not). This will use a basic logistic regression model. The model will be evaluated on the recall score. Specifically, if it achieves a recall score of above 75% or higher, it will be considered a success.
 
-**Still exploring what type of role you would like to get once you graduate?** That's okay! Try to focus on a topic or problem that you are interested in and passionate about. Doing so will help you produce a better project overall that you enjoy creating and that you can speak about confidently and naturally.
+To accomplish the outlined objectives specified in the project proposal, we plan to leverage a combination of diverse machine learning algorithms. The selected algorithms, each offering unique advantages, are tailored to address specific aspects of the project requirements. The following algorithms will be employed:
+1. Logistic Regression
+2. Decision Tree
+3. Random Forest
 
-Coming out of Flatiron School your projects will be listed on your resume and will showcase your specific subject matter knowledge and interest/passions once you're job seeking. Help yourself put your best foot forward and make the strongest first impression possible.
+In the assessment of our model performances, the ROC_AUC metric will be employed as a key evaluation measure. The ROC_AUC is a comprehensive metric particularly well-suited for binary classification problems. It considers both sensitivity and specificity across various threshold levels, providing a robust indication of a model's ability to discriminate between classes.
 
-Here are two grads who successfully did just this...
+Addressing the challenge of class imbalance within our dataset, we will SMOTE. Class imbalance, where one class significantly outnumbers the other, can lead to biased models that predominantly predict the majority class. SMOTE will serve as a crucial technique for mitigating this imbalance by generating synthetic instances of the minority class, thereby leveling the playing field during model training.
 
-> This student was interested in working with government and public sector data, and focused specifically on traffic data and safety. They utilized the Chicago Car Crashes dataset in [one project](https://github.com/jmarkowi/Chicago-Crashes)&#42; then later created a bike lane image dataset from multiple sources for their [capstone project](https://github.com/jmarkowi/NYC_bike_lanes)&#42;. Based on their combination of technical skills and subject-matter expertise, this student landed a government consulting role at ***ASR Analytics*** where they work to prevent identity theft in tax fraud.
+# Logistic Regression
+The logistic regression model exhibits a commendable recall score of 0.76, which, given its status as a baseline model, reflects strong performance. This score signifies the model's capability to accurately identify approximately 76% of actual positive instances. Despite its foundational nature, the model demonstrates effectiveness in capturing instances of interest, making it a valuable component of the predictive framework.
+# Decision Trees
+The recall score of the decision tree model stands at 0.76, a commendable performance that falls slightly short of surpassing our baseline model. This score implies that the model proficiently identifies approximately 76% of actual positive instances. While not an improvement over the baseline, the model's ability to capture a substantial portion of positive instances indicates its effectiveness in identifying potential cases of interest.
+# Random Forest
+The random forest classifier model exhibits an improved recall score of 0.79, showcasing a notable enhancement over its predecessor. This implies that the model accurately identifies approximately 79% of the actual positive instances.
 
-> This student ([GitHub link here](https://github.com/kbaranko/NYC-Building-Energy-Intensity/blob/master/README.md)&#42;) focused on working in the clean energy sector, and created their project *NYC Building Energy Density* using data from the 2016 Energy and Water Data Disclosure for New York City Local Law 84. The student landed a role at ***Kevala***, a clean energy software company, in under two months of job seeking.
+Upon evaluation through the confusion matrix, it becomes evident that the model achieves a higher count of true positives and true negatives in comparison to false positives and false negatives. This suggests a robust performance, emphasizing the model's ability to make correct predictions more frequently than incorrect ones, indicative of its avoidance of overfitting.
 
-&#42;*Keep in mind that the Flatiron School Data Science program has changed over time, so these projects may or may not reflect the current project requirements. They are intended as inspiration for your dataset/project choice.*
+As per the model's analysis, the top three most influential features are identified as total day charge, total international calls, and total evening charge.
+Evaluation
+classifiers                     
+Logistic Regression      0.755319
+RandomForestClassifier  0.787234
+DecisionTreeClassifier  0.755319
+The results table shows that RandomForestClassifier has the highest score followed by LogisticRegression and The DecisionTreeClassifier has the lowest recall score of 0.76.
 
-## Curated List of Datasets
+# Model Comparison
+# Model Tuning
+The tuned Random Forest model demonstrates strong performance in discerning between positive (churned) and negative (non-churned) customer classes, particularly in accurately identifying churned customers. The model achieves a recall score of 0.76, indicating its ability to correctly capture 76% of the actual churned customers.
 
-You may select any of the datasets below - we provide brief descriptions of each. Follow the links to learn more about the dataset and business problems before making a final decision.
+## Recommendations
+In response to the observed higher churn rates in area codes 415 and 510, it is recommended to implement targeted promotional strategies, specifically offering discounts and promotional offers to customers within these areas. By providing incentives, such as exclusive discounts, the aim is to foster customer loyalty and discourage churn. This localized approach acknowledges the unique characteristics and challenges associated with these specific geographical regions.
 
-**If you are feeling overwhelmed or behind, we recommend you choose dataset #1.**
+Additionally, recognizing the critical role of customer service in customer retention, there is a proposal to invest in improving the quality of customer service. This involves enhancing the training programs for customer service representatives, equipping them with the skills and knowledge to promptly and effectively address customer issues. The objective is to elevate customer satisfaction levels and, consequently, reduce the likelihood of churn. By minimizing the need for customers to reach out with concerns, this initiative contributes to a smoother overall customer experience.
 
-### 1) [SyriaTel Customer Churn](https://www.kaggle.com/becksddf/churn-in-telecoms-dataset)
+An evaluation of the existing pricing structure for day, evening, night, and international charges is recommended. Considering the impact of charges on customer decisions to churn, there is a suggestion to explore adjustments to pricing plans or the introduction of discounted packages. This strategic pricing review aims to address any discrepancies and make the company's offerings more competitive, ultimately mitigating factors that contribute to customer churn.
+Next Steps
+To further enrich the company's service offerings, there is a proposal to enhance the value proposition of the voicemail plan. By showcasing the benefits and convenience of voicemail services and potentially introducing additional features or discounts, the goal is to increase adoption among customers. This approach aligns with the broader objective of diversifying and maximizing the appeal of the company's service portfolio to strengthen customer loyalty and retention.
 
-Build a classifier to predict whether a customer will ("soon") stop doing business with SyriaTel, a telecommunications company. This is a **binary** classification problem.
 
-Most naturally, your audience here would be the telecom business itself, interested in reducing how much money is lost because of customers who don't stick around very long. The question you can ask is: are there any predictable patterns here?
 
-### 2) [Tanzanian Water Wells](https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/23/)
-
-Tanzania, as a developing country, struggles with providing clean water to its population of over 57,000,000. There are many water points already established in the country, but some are in need of repair while others have failed altogether.
-
-Build a classifier to predict the condition of a water well, using information about the sort of pump, when it was installed, etc. Your audience could be an NGO focused on locating wells needing repair, or the Government of Tanzania looking to find patterns in non-functional wells to influence how new wells are built. Note that this is a **ternary** classification problem by default, but can be engineered to be binary.
-
-### 3) [H1N1 and Seasonal Flu Vaccines](https://www.drivendata.org/competitions/66/flu-shot-learning/)
-
-As the world struggles to vaccinate the global population against COVID-19, an understanding of how people’s backgrounds, opinions, and health behaviors are related to their personal vaccination patterns can provide guidance for future public health efforts. Your audience could be someone guiding those public health efforts.
-
-This challenge: can you predict whether people got H1N1 and seasonal flu vaccines using data collected in the National 2009 H1N1 Flu Survey? This is a **binary** classification problem, but there are two potential targets: whether the survey respondent received the seasonal flu vaccine, or whether the respondent received the H1N1 flu vaccine. Please choose just one of these potential targets for your minimum viable project.
-
-### 4) [Chicago Car Crashes](https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if)
-
-Note this links also to [Vehicle Data](https://data.cityofchicago.org/Transportation/Traffic-Crashes-Vehicles/68nd-jvt3) and to [Driver/Passenger Data](https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d)
-
-Build a classifier to predict the primary contributory cause of a car accident, given information about the car, the people in the car, the road conditions etc. You might imagine your audience as a Vehicle Safety Board who's interested in reducing traffic accidents, or as the City of Chicago who's interested in becoming aware of any interesting patterns. 
-
-This is a **multi-class** classification problem. You will almost certainly want to bin, trim or otherwise limit the number of target categories on which you ultimately predict. Note that some primary contributory causes have very few samples, for example.
-
-### 5) [Terry Traffic Stops](https://data.seattle.gov/Public-Safety/Terry-Stops/28ny-9ts8)
-
-In [Terry v. Ohio](https://www.oyez.org/cases/1967/67), a landmark Supreme Court case in 1967-8, the court found that a police officer was not in violation of the "unreasonable search and seizure" clause of the Fourth Amendment, even though he stopped and frisked a couple of suspects only because their behavior was suspicious. Thus was born the notion of "reasonable suspicion", according to which an agent of the police may e.g. temporarily detain a person, even in the absence of clearer evidence that would be required for full-blown arrests etc. Terry Stops are stops made of suspicious drivers.
-
-Build a classifier to predict whether an arrest was made after a Terry Stop, given information about the presence of weapons, the time of day of the call, etc. This is a binary classification problem.
-
-Note that this dataset also includes information about gender and race. You may use this data as well. You could conceivably pitch your project as an inquiry into whether race (of officer or of subject) plays a role in whether or not an arrest is made.
-
-If you do elect to make use of race or gender data, be aware that this can make your project a highly sensitive one; your discretion will be important, as well as your transparency about how you use the data and the ethical issues surrounding it.
-
-## Proposing Your Own Dataset
-
-Sourcing new data is a valuable skill for data scientists, but it requires a great deal of care. An inappropriate dataset or an unclear business problem can lead you to spend a lot of time on a project that delivers underwhelming results. The guidelines below will help you complete a project that demonstrates your ability to engage in the full data science process.
-
-Once you've sourced your own dataset and identified the business problem you want to solve with it, **you must run them by your instructor for approval.**
-
-### Data Guidelines
-
-Your dataset must be:
-
-1. **Appropriate for classification.** It should have a categorical outcome or the data needed to engineer one.   
-
-2. **Usable to solve a specific business problem.** This solution must rely on your classification model.
-
-3. **Somewhat complex.** It should contain a minimum of 1000 rows and 10 features.
-
-4. **Unfamiliar.** It can't be one we've already worked with during the course or that is commonly used for demonstration purposes (e.g. Titanic).
-
-5. **Manageable.** Stick to datasets that you can model using the techniques introduced in Phase 3.
-
-### Problem First, or Data First?
-
-There are two ways that you can source your own dataset: **_Problem First_** or **_Data First_**. The less time you have to complete the project, the more strongly we recommend a Data First approach to this project.
-
-**_Problem First_**: Start with a problem that you are interested in that you could potentially solve with a classification model. Then look for data that you could use to solve that problem. This approach is high-risk, high-reward: Very rewarding if you are able to solve a problem you are invested in, but frustrating if you end up sinking lots of time in without finding appropriate data. To mitigate the risk, set a firm limit for the amount of time you will allow yourself to look for data before moving on to the Data First approach.
-
-**_Data First_**: Take a look at some of the most popular internet repositories of cool data sets we've listed below. If you find a data set that's particularly interesting for you, then it's totally okay to build your problem around that data set.
-
-### Potential Data Sources
-
-There are plenty of amazing places that you can get your data from. We recommend you start looking at data sets in some of these resources first:
-
-* [UCI Machine Learning Datasets Repository](https://archive.ics.uci.edu/ml/datasets.php)
-* [Kaggle Datasets](https://www.kaggle.com/datasets)
-* [Awesome Datasets Repo on Github](https://github.com/awesomedata/awesome-public-datasets)
-* Local data portals for state and local government resources
-    - Examples: [NYC](https://opendata.cityofnewyork.us/), [Houston](http://data.houstontx.gov/), [Seattle](https://data.seattle.gov/), [California](https://data.ca.gov/)
-* [Inside AirBNB](http://insideairbnb.com/)
-* [FiveThirtyEight’s data portal](https://data.fivethirtyeight.com/)
-* [Data is Plural’s Archive Spreadsheet](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0)
-* [Datasets Subreddit](https://www.reddit.com/r/datasets/)
 
