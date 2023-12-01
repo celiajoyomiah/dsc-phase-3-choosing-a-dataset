@@ -1,4 +1,4 @@
-## Syriatel Customer Charn Prediction Project
+## Syriatel Customer Churn Prediction Project
 ## Overview
 Syriatel is a telecommunication company founded in 2000 based in Syria with its headquarters in Damascus. It offers GSM,3G, and 4G network services.
 Syriatel is faced with a challenge where there is a high churn rate with most of its customers abandoning their services and switching to their competitors.
